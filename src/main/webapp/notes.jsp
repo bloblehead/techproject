@@ -9,13 +9,15 @@
             const ServletURL = "${pageContext.request.contextPath}/NoteMaker";
             $(document).on("click", "#submitButton", function(event) {
             	event.preventDefault();
-            	//if(!$.trim($("#title").val())){
+            	if($.trim($("#title").val()) === ""){
+            		alert("Title required!");
+            	} else{
             	$.post(ServletURL,
             			$("#inputForm").serialize(),
             			function(responseText) {
                     document.getElementById("inputForm").reset();
             		$("#leftdiv").html(responseText);
-                });//};
+                })};
             });
         </script>
        <script>
@@ -45,7 +47,7 @@
 			<b><font size=6><u>Make Note</u></font></b><br>
 			<form action="" id="inputForm">
 				<label for="title">Title: <br/></label>
-				<input type="text" id="title" name="title"/><br>
+				<input type="text" id="title" name="title" autocomplete="off"/><br>
 				<label for="summary">Summary: <br/></label>
 				<textarea  id="text" name="summary" rows="6"></textarea><br>
 				<input type="submit" value="Submit" id="submitButton">
